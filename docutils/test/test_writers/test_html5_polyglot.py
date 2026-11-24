@@ -469,6 +469,27 @@ f' {WIDTH_ATTR}/>\n{NO_PIL_SYSTEM_MESSAGE}'
 ])
 
 
+totest['no file insertion'] = ({'file_insertion_enabled': False,
+                                'root_prefix': ROOT_PREFIX,
+                                'warning_stream': ''}, [
+["""\
+Don't embed image file if file insertion is disabled!
+
+.. image:: /data/blue%20square.png
+   :loading: embed
+""",
+"""\
+<p>Don't embed image file if file insertion is disabled!</p>
+<img alt="/data/blue%20square.png" src="/data/blue%20square.png" />
+<aside class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">&lt;string&gt;</span>, line 3)</p>
+<p>Cannot embed image, file insertion disabled.</p>
+</aside>
+""",
+],
+])
+
+
 totest['no_backlinks'] = ({'footnote_backlinks': False}, [
 
 ["""\

@@ -19,11 +19,18 @@ Release 0.23.1.rc0 (unpublished)
 * docutils/writers/_html_base.py
 
   - Encode "alt" text if an image is inserted as <video> or <object>.
+  - Don't embed images if "file_insertion_enabled" setting is False.
+    Fixes vulnerability reported by Zachariah Mithani.
 
 * docutils/writers/html4css1/__init__.py
 
   - Support extension "ogv" for video/ogg files.
   - Encode "alt" text if an image is inserted as <object>.
+    Fixes vulnerability reported by Zachariah Mithani.
+
+* docutils/writers/odf_odt/__init__.py
+
+  - Don't embed images if "file_insertion_enabled" setting is False.
     Fixes vulnerability reported by Zachariah Mithani.
 
 

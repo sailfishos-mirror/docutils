@@ -2122,6 +2122,12 @@ class ODFTranslator(nodes.GenericNodeVisitor):
             return 0
 
     def visit_image(self, node) -> None:
+        if not self.settings.file_insertion_enabled:
+            self.document.reporter.warning(
+                'Cannot insert image, file insertion disabled.',
+                base_node=node)
+            # TODO: Insert "alt" text or link to external image.
+            return
         # Capture the image file.
         source = node['uri']
         uri_parts = urllib.parse.urlparse(source)

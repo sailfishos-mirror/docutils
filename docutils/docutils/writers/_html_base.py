@@ -1167,6 +1167,10 @@ class HTMLTranslator(writers.DoctreeTranslator):
         loading = node.get('loading', loading)
         if loading == 'lazy':
             atts['loading'] = 'lazy'
+        elif loading == 'embed' and not self.settings.file_insertion_enabled:
+            self.messages.append(self.document.reporter.warning(
+                'Cannot embed image, file insertion disabled.',
+                base_node=node))
         elif loading == 'embed':
             try:
                 imagepath = self.uri2path(uri)
