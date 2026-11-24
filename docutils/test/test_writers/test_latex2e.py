@@ -30,6 +30,7 @@ class WriterPublishTestCase(unittest.TestCase):
     settings = {
         '_disable_config': True,
         'strict_visitor': True,
+        'warning_stream': '',
         # avoid latex writer future warnings:
         'use_latex_citations': False,
         'legacy_column_widths': True,
@@ -169,6 +170,49 @@ r"""
 \href{example.org/parrots}{\includegraphics{parrot.png}}
 
 See \hyperref[i-mage]{i-mage} and \hyperref[fig-ure]{fig-ure} with \hyperref[f-caption]{f-caption} and \hyperref[le-gend]{le-gend}.
+"""],
+[r"""
+Problematic characters in image URIs:
+
+.. image:: braces} raw_LaTeX{
+.. image:: with\\textbackslash
+.. image:: double^^caret
+""",
+r"""
+Problematic characters in image URIs:
+
+
+\begin{DUclass}{system-message}
+\begin{DUadmonition}
+\DUtitle{\color{red}System Message}
+
+ERROR/3 in \texttt{<string>}
+
+Image URI \textquotedbl{}braces\}raw\_LaTeX\{\textquotedbl{} not supported. Must not contain \textquotedbl{}\textasciicircum{}\textasciicircum{}\textquotedbl{}, \textquotedbl{}\textbackslash{}\textquotedbl{}, or unbalanced braces.
+\end{DUadmonition}
+\end{DUclass}
+
+
+\begin{DUclass}{system-message}
+\begin{DUadmonition}
+\DUtitle{\color{red}System Message}
+
+ERROR/3 in \texttt{<string>}
+
+Image URI \textquotedbl{}with\textbackslash{}textbackslash\textquotedbl{} not supported. Must not contain \textquotedbl{}\textasciicircum{}\textasciicircum{}\textquotedbl{}, \textquotedbl{}\textbackslash{}\textquotedbl{}, or unbalanced braces.
+\end{DUadmonition}
+\end{DUclass}
+
+
+\begin{DUclass}{system-message}
+\begin{DUadmonition}
+\DUtitle{\color{red}System Message}
+
+ERROR/3 in \texttt{<string>}
+
+Image URI \textquotedbl{}double\textasciicircum{}\textasciicircum{}caret\textquotedbl{} not supported. Must not contain \textquotedbl{}\textasciicircum{}\textasciicircum{}\textquotedbl{}, \textquotedbl{}\textbackslash{}\textquotedbl{}, or unbalanced braces.
+\end{DUadmonition}
+\end{DUclass}
 """],
 # tables
 # ======

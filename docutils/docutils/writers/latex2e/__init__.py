@@ -2528,6 +2528,16 @@ class LaTeXTranslator(writers.DoctreeTranslator):
         attrs = node.attributes
         # convert image URI to filesystem path, do not adjust relative path:
         imagepath = self.uri2path(attrs['uri'], output_path='')
+        # check for problematic characters
+        pp = imagepath.as_posix()
+        if '\\' in pp or '^^' in pp or self.has_unbalanced_braces(pp):
+            msg = self.error(
+                f'Image URI "{attrs["uri"]}" not supported. '
+                'Must not contain "^^", "\\", or unbalanced braces.')
+            if (self.settings.report_level <= msg['level']
+                    and not self.is_inline(node)):
+                msg.walkabout(self)
+            return
         # alignment defaults:
         if 'align' not in attrs:
             # Set default align of image in a figure to 'center'
@@ -3146,7 +3156,9 @@ class LaTeXTranslator(writers.DoctreeTranslator):
             line = ''
         self.out.append(f"\n{node['type']}/{node['level']} in "
                         f"\\texttt{{{self.encode(node['source'])}}}{line}\n")
-        if len(node['backrefs']) == 1:
+        if len(node['backrefs']) == 0:
+            self.context.append('')
+        elif len(node['backrefs']) == 1:
             self.out.append(f"\n\\hyperlink{{{node['backrefs'][0]}}}{{")
             self.context.append('}\n')
         else:
