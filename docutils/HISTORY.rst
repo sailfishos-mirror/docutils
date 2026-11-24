@@ -13,6 +13,19 @@
 
 .. contents::
 
+Release 0.23.1.rc0 (unpublished)
+================================
+
+* docutils/writers/_html_base.py
+
+  - Encode "alt" text if an image is inserted as <video> or <object>.
+
+* docutils/writers/html4css1/__init__.py
+
+  - Support extension "ogv" for video/ogg files.
+  - Encode "alt" text if an image is inserted as <object>.
+    Fixes vulnerability reported by Zachariah Mithani.
+
 
 Release 0.23 (2026-05-27)
 =========================

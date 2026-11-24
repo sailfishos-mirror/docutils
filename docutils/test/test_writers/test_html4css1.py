@@ -127,6 +127,14 @@ reference and the target.</p>
 </table>
 """,
 ],
+["""\
+.. image:: dummy.mp4
+   :alt: <script>alert(1)</script>
+""",
+"""\
+<object data="dummy.mp4" type="video/mp4">&lt;script&gt;alert(1)&lt;/script&gt;</object>
+""",
+],
 ])
 
 

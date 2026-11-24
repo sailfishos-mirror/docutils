@@ -610,10 +610,11 @@ f"""\
 ["""\
 .. image:: dummy.mp4
    :scale: 100%
+   :alt: <script>alert(1)</script>
 """,
 f"""\
-<video src="dummy.mp4" title="dummy.mp4">
-<a href="dummy.mp4">dummy.mp4</a>
+<video src="dummy.mp4" title="&lt;script&gt;alert(1)&lt;/script&gt;">
+<a href="dummy.mp4">&lt;script&gt;alert(1)&lt;/script&gt;</a>
 </video>
 <aside class="system-message">
 <p class="system-message-title">System Message: WARNING/2 \

@@ -552,7 +552,8 @@ class HTMLTranslator(writers._html_base.HTMLTranslator):
                           '.swf': 'application/x-shockwave-flash',
                           '.mp4': 'video/mp4',
                           '.webm': 'video/webm',
-                          '.ogg': 'video/ogg',
+                          '.ogv': 'video/ogg',
+                          '.ogg': 'application/ogg',
                           }
 
     def visit_image(self, node) -> None:
@@ -614,8 +615,9 @@ class HTMLTranslator(writers._html_base.HTMLTranslator):
             atts['class'] = 'align-%s' % node['align']
         if ext in self.object_image_types:
             # do NOT use an empty tag: incorrect rendering in browsers
+            alttext = self.encode(node.get('alt', uri))
             self.body.append(self.starttag(node, 'object', '', **atts)
-                             + node.get('alt', uri) + '</object>' + suffix)
+                             + f'{alttext}</object>{suffix}')
         else:
             self.body.append(self.emptytag(node, 'img', suffix, **atts))
 
