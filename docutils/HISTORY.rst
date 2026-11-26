@@ -13,8 +13,8 @@
 
 .. contents::
 
-Release 0.23.1.rc0 (unpublished)
-================================
+Release 0.23.1 (2026-11-26)
+===========================
 
 * docutils/writers/_html_base.py
 
